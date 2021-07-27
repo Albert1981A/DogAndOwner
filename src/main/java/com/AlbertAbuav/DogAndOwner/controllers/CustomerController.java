@@ -22,14 +22,14 @@ public class CustomerController extends ClientController{
     private final LoginManager loginManager;
     private final TokenManager tokenManager;
 
-    @PostMapping("login")
+    @PostMapping("login") // ==>  http://localhost:8080/customer/login
     @Override
     public ResponseEntity<?> login(@RequestBody LoginDetails loginDetails) {
         String token = loginManager.login(loginDetails.getEmail(), loginDetails.getPassword(), UserType.CUSTOMER);
         return new ResponseEntity<>(token, HttpStatus.CREATED);  //==> return String token + 201
     }
 
-    @DeleteMapping("logout")
+    @DeleteMapping("logout") // ==>  http://localhost:8080/customer/logout
     @Override
     public ResponseEntity<?> logOut(@RequestBody LogoutDetails logoutDetails) {
         tokenManager.deleteToken(logoutDetails.getToken());

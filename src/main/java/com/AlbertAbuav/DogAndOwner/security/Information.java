@@ -18,7 +18,7 @@ public class Information {
     private ClientService clientService;
     private LocalDateTime time;
 
-    public static boolean removeTokensEvery10Mimuts(Map.Entry<String, Information> entry) {
+    public static boolean removeTokensEvery10Minutes(Map.Entry<String, Information> entry) {
         return entry.getValue().getTime().isBefore(LocalDateTime.now().minusMinutes(10));
     }
 

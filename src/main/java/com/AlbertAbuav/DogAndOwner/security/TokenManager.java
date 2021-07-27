@@ -1,5 +1,6 @@
 package com.AlbertAbuav.DogAndOwner.security;
 
+import com.AlbertAbuav.DogAndOwner.exceptions.SecurityException01;
 import com.AlbertAbuav.DogAndOwner.serviceImpl.ClientService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,12 +35,15 @@ public class TokenManager {
         map.remove(token);
     }
 
-    public boolean isExist(String token) {
-        return map.get(token) != null;
+    public boolean isExist(String token) throws SecurityException01 {
+        if (map.get(token) == null){
+            throw new SecurityException01("Unauthorized entry");
+        }
+        return true;
     }
 
     public void removeExpired() {
         //map.entrySet().removeIf(entry -> entry.getValue().getTime().isBefore(LocalDateTime.now().minusMinutes(10)));
-        map.entrySet().removeIf(Information::removeTokensEvery10Mimuts);
+        map.entrySet().removeIf(Information::removeTokensEvery10Minutes);
     }
 }
